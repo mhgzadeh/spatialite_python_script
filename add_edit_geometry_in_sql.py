@@ -1,6 +1,6 @@
 class AddGeometry:
     def __init__(self, epsg_num, input_filename, output_filename):
-        self.epsg_num = epsg_num
+        self.epsg_num = int(epsg_num)
         self.sql_text = self.__open_text_file(input_filename)
         self.edited_sql_list = list()
         self.table_name = list()
