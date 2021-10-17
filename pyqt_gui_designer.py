@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, \
     QPushButton, QLabel, QLineEdit, QFileDialog, QDesktopWidget
 from PyQt5 import uic
-import sys
 
 
 class MainWindow(QMainWindow):
@@ -55,12 +54,4 @@ class MainWindow(QMainWindow):
 
     def get_epsg_num(self):
         self.input_data["epsg_num"] = self.le_epsg_num.text()
-        print(self.input_data)
         self.close()
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    main_window = MainWindow()
-    app.exec_()
-    print(main_window.input_data)

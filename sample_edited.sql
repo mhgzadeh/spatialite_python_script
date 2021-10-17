@@ -88,6 +88,6 @@ CREATE TABLE 'Tree'
 
 ;
 
-SELECT AddGeometryColumn('Building', 'geometry', 4326, 'POLYGON');
-SELECT AddGeometryColumn('HousePipe', 'geometry', 4326, 'LINESTRING');
-SELECT AddGeometryColumn('Tree', 'geometry', 4326, 'POINT');
+SELECT AddGeometryColumn(Building, 'geometry', 4326, 'POLYGON');
+SELECT AddGeometryColumn(HousePipe, 'geometry', 4326, 'LINESTRING');
+SELECT AddGeometryColumn(Tree, 'geometry', 4326, 'POINT');
