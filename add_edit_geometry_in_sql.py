@@ -56,7 +56,7 @@ class AddGeometry:
         # geometry_type = [(f"'{self.table_name[i]}'", self.table_name_type[i]) for i in range(len(self.table_name))]
         for i in range(len(self.table_name)):
             self.edited_sql_list.append(
-                f"SELECT AddGeometryColumn({self.table_name[i]}, 'geometry', {self.epsg_num}, {geometry_dic[self.table_name_type[i]]});"
+                f"SELECT AddGeometryColumn('{self.table_name[i]}', 'geometry', {self.epsg_num}, {geometry_dic[self.table_name_type[i]]});"
             )
 
     def __write_new_sql_file(self, output_filename):
