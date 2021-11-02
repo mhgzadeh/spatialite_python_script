@@ -4,7 +4,7 @@ class AddGeometry:
         self.sql_text = self.__open_text_file(input_filename)
         self.edited_sql_list = list()
         self.table_name = list()
-        self.table_name_type = list()
+        self.geometry_table_name = list()
         self.__edit_sql_file()
         self.__add_geometry_to_edited_sql_file()
         self.__write_new_sql_file(output_filename)
@@ -32,8 +32,9 @@ class AddGeometry:
             if 'CREATE TABLE' in line:
                 self.table_name.append(line.split(' ')[-1][1:-2])
                 self.edited_sql_list.append(line)
-            elif 'Geometry' in line:
-                self.table_name_type.append(line.split(' ')[1].lower())
+            elif 'Geometry' in line or 'geometry' in line:
+                geometry_line = line.split(' ')
+                self.geometry_table_name.append((self.table_name[-1], geometry_line[1].lower()))
                 continue
             elif ')\n' in line:
                 if self.edited_sql_list[-1][-2] == ',':
@@ -54,9 +55,9 @@ class AddGeometry:
                         'multilinestring': "'MULTILINESTRING'", 'multipolygon': "'MULTIPOLYGON'"}
 
         # geometry_type = [(f"'{self.table_name[i]}'", self.table_name_type[i]) for i in range(len(self.table_name))]
-        for i in range(len(self.table_name)):
+        for item in self.geometry_table_name:
             self.edited_sql_list.append(
-                f"SELECT AddGeometryColumn('{self.table_name[i]}', 'geometry', {self.epsg_num}, {geometry_dic[self.table_name_type[i]]});"
+                f"SELECT AddGeometryColumn('{item[0]}', 'geometry', {self.epsg_num}, {geometry_dic[item[1]]});"
             )
 
     def __write_new_sql_file(self, output_filename):

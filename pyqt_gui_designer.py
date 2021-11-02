@@ -41,7 +41,7 @@ class MainWindow(QMainWindow):
         self.move(frame_geometry.topLeft())
 
     def file_name_selector(self):
-        file_name, _ = QFileDialog.getOpenFileName(self, "Open Input File", "", "Text Files (*.txt)")
+        file_name, _ = QFileDialog.getOpenFileName(self, "Open Input File", "", "SQL Files (*.sql)")
         if file_name:
             self.le_input.setText(file_name)
             self.input_data['input_file'] = file_name
